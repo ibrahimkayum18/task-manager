@@ -3,7 +3,7 @@ import { FaHome, FaPhone, FaPlus, FaUser } from "react-icons/fa";
 import { GrProjects } from "react-icons/gr";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
-import axios from "axios";
+import { RiMenu2Line } from "react-icons/ri";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 
@@ -48,7 +48,7 @@ const Dashboard = () => {
       <li>
         <Link to={"/dashboard/new-projects"}>
           <GrProjects />
-          New Projects
+          My Projects
         </Link>
       </li>
       <div className="divider"></div>
@@ -81,9 +81,9 @@ const Dashboard = () => {
           {/* Page content here */}
           <label
             htmlFor="my-drawer-2"
-            className="btn btn-primary drawer-button lg:hidden"
+            className="btn bg-blue-700 text-white ml-[385px] md:ml-0 md:mr-44 mt-2 drawer-button lg:hidden"
           >
-            Open drawer
+           <RiMenu2Line />
           </label>
         </div>
         <div className="drawer-side">

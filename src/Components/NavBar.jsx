@@ -30,7 +30,7 @@ const NavBar = () => {
         About Us
       </Link>
       <Link to="/contact" className="text-white hover:text-gray-300">
-        Contact
+        Contact Us
       </Link>
       {!user ? (
         <Link to="/login" className="text-white hover:text-gray-300">
