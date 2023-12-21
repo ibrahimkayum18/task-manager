@@ -41,6 +41,7 @@ const Login = () => {
     googleLogin()
       .then(() => {
         toast.success('Logged In Successfully')
+        navigate(location?.state ? location.state : '/')
         // if(user){
         //   const loggedUser = {email}
         //   axios.post( 'https://job-hub-server-six.vercel.app/jwt',loggedUser, {withCredentials: true})

@@ -1,5 +1,6 @@
 import { TypeAnimation } from "react-type-animation";
 import { FaSearch } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Banner = ({ input }) => {
 
@@ -9,7 +10,7 @@ const Banner = ({ input }) => {
     data-aos="flip-right"
       style={{
         backgroundImage:
-          "url(https://i.ibb.co/LN09PkL/pexels-fauxels-3184291.jpg)",
+          "url(https://i.ibb.co/p0RZVjt/15-Best-Task-Management-Software-For-Teams-In-2022.webp)",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         overflow: "hidden",
@@ -40,7 +41,11 @@ const Banner = ({ input }) => {
               className="text-2xl lg:text-5xl font-bold text-left text-white"
             />
           </div>
-              <button className="btn btn-primary">Let's Explore</button>
+              <div>
+                <Link to={'/dashboard/projects'}>
+                <button className="btn btn-primary">Let's Explore</button>
+                </Link>
+              </div>
         </div>
       </div>
     </div>

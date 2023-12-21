@@ -6,6 +6,10 @@ import About from "../Pages/About/About";
 import Contact from "../Pages/Contact/Contact";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import Dashboard from "../Layout/Dashboard";
+import Projects from "../Pages/DashboardPages/Projects";
+import CompletedProjects from "../Pages/DashboardPages/CompletedProjects";
+import PrivateRouter from "../Provider/PrivetRouter";
 
 
 const Router = createBrowserRouter([
@@ -36,6 +40,20 @@ const Router = createBrowserRouter([
             {
                 path:'/register',
                 element:<Register />
+            }
+        ]
+    },
+    {
+        path:'/dashboard',
+        element:<PrivateRouter><Dashboard /></PrivateRouter>,
+        children:[
+            {
+                path:'/dashboard/projects',
+                element:<CompletedProjects />
+            },
+            {
+                path:'/dashboard/new-projects',
+                element:<CompletedProjects />
             }
         ]
     }
