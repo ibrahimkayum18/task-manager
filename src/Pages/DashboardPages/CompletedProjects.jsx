@@ -51,7 +51,7 @@ const CompletedProjects = () => {
     // Fetch data using Axios
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/projects');
+        const response = await axios.get('https://task-manager-server-sooty.vercel.app/projects');
         const data = response.data;
 
         // Set data to state

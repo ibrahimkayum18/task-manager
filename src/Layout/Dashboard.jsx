@@ -15,7 +15,6 @@ const Dashboard = () => {
   const { control, handleSubmit, register } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data.title);
     axiosPublic.post("/projects", data).then((res) => {
       if (res.data.insertedId) {
         toast.success("Task Addeded Successfully");
@@ -38,6 +37,11 @@ const Dashboard = () => {
         </Link>
       </li>
       <div className="divider"></div>
+      <div className="flex items-center gap-3 p-2 rounded-full bg-white">
+      <img src={user.photoURL} className="w-10 h-10 rounded-full" alt="" />
+      <p className="">{user.displayName}</p>
+      </div>
+      
       <li>
         <Link to={"/"}>
           <FaHome />
@@ -50,6 +54,7 @@ const Dashboard = () => {
           Contact
         </Link>
       </li>
+      
       <li>
         <button onClick={() => logOut()}>
           <FaUser />
@@ -60,8 +65,8 @@ const Dashboard = () => {
   );
 
   return (
-    <div className="lg:flex gap-5">
-      <div className="drawer lg:drawer-open w-64 lg:w-80">
+    <div className="lg:flex gap-5" >
+      <div className="drawer lg:drawer-open w-64 lg:w-80"  data-aos="fade-up">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col items-center justify-center">
           {/* Page content here */}
@@ -95,7 +100,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="w-full">
+      <div className="w-full"  data-aos="fade-up">
         <dialog id="my_modal_2" className="modal">
           <div className="modal-box">
             <h3 className="font-bold text-lg">Hello!</h3>
@@ -117,6 +122,21 @@ const Dashboard = () => {
                     id="title"
                     name="title"
                     {...register("title")}
+                    className="mt-1 p-2 w-full border rounded-md"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label
+                    htmlFor="deadline"
+                    className="block text-sm font-medium text-gray-600"
+                  >
+                    Deadline
+                  </label>
+                  <input
+                    type="deadline"
+                    id="deadline"
+                    name="deadline"
+                    {...register("deadline")}
                     className="mt-1 p-2 w-full border rounded-md"
                   />
                 </div>

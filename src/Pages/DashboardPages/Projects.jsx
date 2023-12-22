@@ -46,6 +46,7 @@ const Projects = () => {
               <th></th>
               <th>Task Title</th>
               <th>Task Description</th>
+              <th>Deadline</th>
               <th>Edit</th>
               <th>Action</th>
             </tr>
@@ -56,6 +57,7 @@ const Projects = () => {
                 <th>{index + 1}</th>
                 <td>{project.title}</td>
                 <td>{project.description}</td>
+                <td>{project.deadline}</td>
                 <td>
                   <Link to={`/update/${project._id}`}>
                   <button

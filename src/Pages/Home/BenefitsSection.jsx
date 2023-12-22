@@ -30,7 +30,7 @@ const BenefitsSection = () => {
   ];
 
   return (
-    <div className="bg-gray-100 py-16">
+    <div className="bg-gray-100 py-16" data-aos="fade-up">
       <div className="container mx-auto text-center">
         <h2 className="text-4xl font-bold text-gray-800 mb-4">Who Benefits Most?</h2>
         <p className="text-gray-600 mb-8">
@@ -38,7 +38,7 @@ const BenefitsSection = () => {
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {benefitsData.map((benefit, index) => (
-            <div key={index} className="bg-white p-6 rounded-lg shadow-md">
+            <div key={index} className="bg-white p-6 rounded-lg shadow-md mx-5 lg:mx-0" data-aos="flip-right">
               <img
                 src={benefit.image}
                 alt={`${benefit.category} Image`}

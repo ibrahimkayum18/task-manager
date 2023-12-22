@@ -1,6 +1,6 @@
 const About = () => {
   return (
-    <div>
+    <div  data-aos="fade-up">
       <div
         className="h-96 bg-cover bg-center relative"
         style={{ backgroundImage: "url(https://i.ibb.co/LCTfnnY/images.png)" }}
@@ -26,11 +26,12 @@ const About = () => {
           </p>
           <div className=" lg:flex justify-center items-center gap-6 w-3/4 mx-auto">
             <img
+             data-aos="flip-right"
               src="https://i.ibb.co/tJpCGxX/images-5.jpg" // Replace with your actual team image link
               alt="Team Image"
               className="w-full max-w-lg h-auto object-cover mb-4 rounded-lg shadow-md"
             />
-            <div className="text-left">
+            <div className="text-left"  data-aos="fade-up">
               <h2 className="text-4xl font-bold text-gray-800 mb-4">
                 About Us
               </h2>
