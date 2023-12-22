@@ -65,8 +65,8 @@ const NavBar = () => {
           className="text-white text-xl font-bold flex gap-3 items-center"
         >
           <img
-            className="w-12 h-12 rounded-full"
-            src="https://i.ibb.co/nwt5mjc/logo.png"
+            className="w-12 h-12 rounded-full bg-white"
+            src="https://i.ibb.co/9gMRtrJ/TM-Symbol-Free-Download-PNG.png"
             alt=""
           />
           <span className="text-3xl">Task Manager</span>

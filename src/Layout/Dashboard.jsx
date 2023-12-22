@@ -84,7 +84,11 @@ const Dashboard = () => {
             className="drawer-overlay"
           ></label>
           <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content text-center">
-            <h2 className="text-4xl">Task Manager</h2>
+            <div className="flex items-center gap-2">
+              <img src="https://i.ibb.co/9gMRtrJ/TM-Symbol-Free-Download-PNG.png" className="w-10 h-10 rounded-full bg-white" alt="" />
+              <h2 className="text-3xl">Task Manager</h2>
+            </div>
+            
             <li
               onClick={() => document.getElementById("my_modal_2").showModal()}
             >
@@ -133,7 +137,7 @@ const Dashboard = () => {
                     Deadline
                   </label>
                   <input
-                    type="deadline"
+                    type="date"
                     id="deadline"
                     name="deadline"
                     {...register("deadline")}
