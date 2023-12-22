@@ -10,6 +10,7 @@ import Dashboard from "../Layout/Dashboard";
 import Projects from "../Pages/DashboardPages/Projects";
 import CompletedProjects from "../Pages/DashboardPages/CompletedProjects";
 import PrivateRouter from "../Provider/PrivetRouter";
+import Update from "../Pages/Update/Update";
 
 
 const Router = createBrowserRouter([
@@ -52,10 +53,14 @@ const Router = createBrowserRouter([
                 element:<CompletedProjects />
             },
             {
-                path:'/dashboard/new-projects',
-                element:<CompletedProjects />
+                path:'/dashboard/my-projects',
+                element:<Projects />
             }
         ]
+    },
+    {
+        path:'/update/:id',
+        element:<Update />
     }
 ])
 

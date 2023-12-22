@@ -6,33 +6,19 @@ import { AuthContext } from "../Provider/AuthProvider";
 import { RiMenu2Line } from "react-icons/ri";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
+import { Controller, useForm } from "react-hook-form";
 
 const Dashboard = () => {
   const { user, logOut } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const title = form.title.value;
-    const description = form.description.value;
-    const priority = form.priority.value;
-    const email = user.email;
-    const name = user.displayName;
+  const { control, handleSubmit, register } = useForm();
 
-    const projectsInfo = {
-      title,
-      description,
-      priority,
-      email,
-      name,
-    };
-
-    axiosPublic.post("/projects", projectsInfo)
-    .then((res) => {
-      if(res.data.insertedId){
-        toast.success('Task Addeded Successfully')
-        form.reset(' ')
+  const onSubmit = (data) => {
+    console.log(data.title);
+    axiosPublic.post("/projects", data).then((res) => {
+      if (res.data.insertedId) {
+        toast.success("Task Addeded Successfully");
       }
     });
   };
@@ -46,7 +32,7 @@ const Dashboard = () => {
         </Link>
       </li>
       <li>
-        <Link to={"/dashboard/new-projects"}>
+        <Link to={"/dashboard/my-projects"}>
           <GrProjects />
           My Projects
         </Link>
@@ -54,20 +40,20 @@ const Dashboard = () => {
       <div className="divider"></div>
       <li>
         <Link to={"/"}>
-            <FaHome />
-            Home
+          <FaHome />
+          Home
         </Link>
       </li>
       <li>
         <Link to={"/contact"}>
-            <FaPhone />
-            Contact
+          <FaPhone />
+          Contact
         </Link>
       </li>
       <li>
         <button onClick={() => logOut()}>
-        <FaUser />
-        Log Out
+          <FaUser />
+          Log Out
         </button>
       </li>
     </>
@@ -83,7 +69,7 @@ const Dashboard = () => {
             htmlFor="my-drawer-2"
             className="btn bg-blue-700 text-white ml-[385px] md:ml-0 md:mr-44 mt-2 drawer-button lg:hidden"
           >
-           <RiMenu2Line />
+            <RiMenu2Line />
           </label>
         </div>
         <div className="drawer-side">
@@ -115,41 +101,75 @@ const Dashboard = () => {
             <h3 className="font-bold text-lg">Hello!</h3>
             <p className="py-4">Create New Project</p>
             <div>
-              <form onSubmit={handleSubmit}>
-                <div>
-                  <label className="block">Task Title</label>
-                  <input
-                    type="text"
-                    name="title"
-                    className="input input-bordered w-full my-3"
-                    placeholder="Task title..."
-                  />
-                </div>
-                <div>
-                  <label className="block">Task Description</label>
-                  <input
-                    type="text"
-                    name="description"
-                    className="input input-bordered w-full my-3"
-                    placeholder="Task description..."
-                  />
-                </div>
-                <div>
-                  <label>Task Priority</label>
-                  <select
-                    name="priority"
-                    className="input input-bordered w-full my-3"
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="max-w-md mx-auto mt-8"
+              >
+                <div className="mb-4">
+                  <label
+                    htmlFor="title"
+                    className="block text-sm font-medium text-gray-600"
                   >
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="High">High</option>
-                  </select>
+                    Title
+                  </label>
+                  <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    {...register("title")}
+                    className="mt-1 p-2 w-full border rounded-md"
+                  />
                 </div>
-                <div>
-                  <button className="btn btn-primary w-full" type="submit">
-                    Submit
-                  </button>
+
+                <div className="mb-4">
+                  <label
+                    htmlFor="description"
+                    className="block text-sm font-medium text-gray-600"
+                  >
+                    Description
+                  </label>
+                  <textarea
+                    id="description"
+                    name="description"
+                    {...register("description")}
+                    rows="4"
+                    className="mt-1 p-2 w-full border rounded-md"
+                  ></textarea>
                 </div>
+
+                <div className="mb-4">
+                  <label
+                    htmlFor="priority"
+                    className="block text-sm font-medium text-gray-600"
+                  >
+                    Priority
+                  </label>
+                  <Controller
+                    name="priority"
+                    control={control}
+                    defaultValue=""
+                    render={({ field }) => (
+                      <select
+                        {...field}
+                        className="mt-1 p-2 w-full border rounded-md"
+                      >
+                        <option value="" disabled>
+                          Select Priority
+                        </option>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                      </select>
+                    )}
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                >
+                  Submit
+                </button>
               </form>
             </div>
           </div>
