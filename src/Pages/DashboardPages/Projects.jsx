@@ -9,6 +9,10 @@ const Projects = () => {
   const [projects, refetch] = useProjects();
   const axiosPublic = useAxiosPublic();
 
+  const handleProject = (id) => {
+    console.log(id);
+  };
+
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -36,9 +40,6 @@ const Projects = () => {
 
   return (
     <div>
-      <h2 className="text-4xl text-center my-3 font-semibold">
-        My All Projects
-      </h2>
       <div>
         <table className="table">
           <thead>
@@ -53,18 +54,16 @@ const Projects = () => {
           </thead>
           <tbody>
             {projects.map((project, index) => (
-              <tr key={project._id}>
+              <tr key={project._id} onClick={() => handleProject(project._id)}>
                 <th>{index + 1}</th>
                 <td>{project.title}</td>
                 <td>{project.description}</td>
                 <td>{project.deadline}</td>
                 <td>
                   <Link to={`/update/${project._id}`}>
-                  <button
-                    className="text-xl font-bold"
-                  >
-                    <RiEdit2Fill />
-                  </button>
+                    <button className="text-xl font-bold">
+                      <RiEdit2Fill />
+                    </button>
                   </Link>
                 </td>
                 <td>
@@ -80,7 +79,6 @@ const Projects = () => {
           </tbody>
         </table>
       </div>
-      
     </div>
   );
 };

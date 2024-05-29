@@ -8,11 +8,10 @@ const NavBar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleLogOut = () => {
-    logOut()
-    .then(() => {
-        toast.success('Log Out Successful')
-    })
-  }
+    logOut().then(() => {
+      toast.success("Log Out Successful");
+    });
+  };
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -38,8 +37,12 @@ const NavBar = () => {
         </Link>
       ) : (
         <div className="dropdown dropdown-end">
-          <div tabIndex={0} role="button" >
-            <img className="h-12 w-12 rounded-full" src={user.photoURL} alt="" />
+          <div tabIndex={0} role="button">
+            <img
+              className="h-12 w-12 rounded-full"
+              src={user.photoURL}
+              alt=""
+            />
           </div>
           <ul
             tabIndex={0}
@@ -69,7 +72,9 @@ const NavBar = () => {
             src="https://i.ibb.co/9gMRtrJ/TM-Symbol-Free-Download-PNG.png"
             alt=""
           />
-          <span className="text-3xl">Task Manager</span>
+          <span className="text-3xl">
+            Made<span className="text-yellow-500">It</span>
+          </span>
         </Link>
 
         {/* Navigation links */}
