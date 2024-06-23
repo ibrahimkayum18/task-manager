@@ -4,8 +4,8 @@ import toast from "react-hot-toast";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 const Login = () => {
-  const [email, setEmail] = useState('')
-  const [user, setUser] = useState([])
+  const [email, setEmail] = useState("");
+  const [user, setUser] = useState([]);
   const { login, googleLogin } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
@@ -16,14 +16,14 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
-    setEmail(email)
+    setEmail(email);
 
     login(email, password)
       .then((res) => {
-        setUser(res.data)
-        toast.success('Logged In Successfully')
-        navigate(location?.state ? location.state : '/')
-        
+        setUser(res.data);
+        toast.success("Logged In Successfully");
+        navigate(location?.state ? location.state : "/");
+
         // if(user){
         //   const loggedUser = {email}
         //   axios.post( 'https://job-hub-server-six.vercel.app/jwt',loggedUser, {withCredentials: true})
@@ -33,15 +33,14 @@ const Login = () => {
         //     }
         //   })
         // }
-        
       })
       .catch((error) => console.log(error));
   };
   const havdleGoogleLogIn = () => {
     googleLogin()
       .then(() => {
-        toast.success('Logged In Successfully')
-        navigate(location?.state ? location.state : '/')
+        toast.success("Logged In Successfully");
+        navigate(location?.state ? location.state : "/");
         // if(user){
         //   const loggedUser = {email}
         //   axios.post( 'https://job-hub-server-six.vercel.app/jwt',loggedUser, {withCredentials: true})
@@ -56,11 +55,11 @@ const Login = () => {
   };
 
   return (
-    <div  data-aos="fade-up" className="flex items-center justify-center bg-sky-200 py-10">
+    <div data-aos="fade-up" className="flex items-center justify-center py-10">
       <div className="w-full  flex justify-center items-center">
         <div className="p-5 md:p-10 rounded-lg w-7/12 mx-auto bg-base-100">
           <h2 className="text-3xl md:text-4xl font-bold text-center pb-8">
-            Log In Now
+            Log In To MadeIT
           </h2>
           <form onSubmit={handleLogIn}>
             <div className="form-control ">
@@ -86,13 +85,16 @@ const Login = () => {
               />
             </div>
             <div className="my-5">
-              <button type="submit" className="py-3 w-full bg-blue-700 text-white hover:bg-blue-500 rounded-lg">
+              <button
+                type="submit"
+                className="py-3 w-full bg-blue-700 text-white hover:bg-blue-500 rounded-lg"
+              >
                 Sign In
               </button>
             </div>
           </form>
           <p>
-            new to Job Hub?{" "}
+            new to MadeIT?{" "}
             <Link
               to={"/register"}
               className="text-blue-600 hover:underline font-bold"
@@ -105,8 +107,8 @@ const Login = () => {
             <div className="mt-5">
               <button onClick={havdleGoogleLogIn} className="w-full mx-auto ">
                 <img
-                  className="w-12 h-12 p-2 mx-auto rounded-lg border border-blue-700 "
-                  src="https://i.ibb.co/VWjqYXd/Google-G-Logo-svg.webp"
+                  className="w-28 h-12 p-2 mx-auto rounded-lg border border-blue-700 "
+                  src="https://i.ibb.co/dkKNbz2/download-2.png"
                   alt=""
                 />
               </button>
@@ -117,7 +119,7 @@ const Login = () => {
       <div className=" w-3/4 lg:pr-14">
         <img
           className="w-full p-5"
-          src="https://i.ibb.co/6HS80CK/istockphoto-1312423123-612x612.jpg"
+          src="https://i.ibb.co/4Kxk1DV/download-3.png"
           alt=""
         />
       </div>

@@ -43,20 +43,24 @@ const BenefitsSection = () => {
           Discover how our task management website can enhance productivity for
           different professionals.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {benefitsData.map((benefit, index) => (
             <div
               key={index}
-              className="bg-white p-6 rounded-lg shadow-md mx-5 lg:mx-0"
+              className="bg-white  rounded-lg shadow-md mx-5 lg:mx-0"
               data-aos="flip-right"
             >
               <img
                 src={benefit.image}
                 alt={`${benefit.category} Image`}
-                className="w-full h-32 object-cover mb-4 rounded-lg"
+                className="w-full h-48 object-cover mb-4 rounded-lg"
               />
-              <h3 className="text-xl font-semibold mb-2">{benefit.category}</h3>
-              <p className="text-gray-600">{benefit.description}</p>
+              <div className="pb-10 px-5">
+                <h3 className="text-xl font-semibold mb-2">
+                  {benefit.category}
+                </h3>
+                <p className="text-gray-600">{benefit.description}</p>
+              </div>
             </div>
           ))}
         </div>

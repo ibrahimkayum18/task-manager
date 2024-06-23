@@ -15,6 +15,7 @@ import WorkToDo from "../Pages/DashboardPages/WorkToDo";
 import Boards from "../Pages/DashboardPages/Boards";
 import Members from "../Pages/DashboardPages/Members";
 import WorkspaceSettings from "../Pages/DashboardPages/WorkspaceSettings";
+import Project from "../Pages/DashboardPages/Project";
 
 const Router = createBrowserRouter([
   {
@@ -37,14 +38,6 @@ const Router = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
-      {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/register",
-        element: <Register />,
-      },
     ],
   },
   {
@@ -57,7 +50,7 @@ const Router = createBrowserRouter([
     children: [
       {
         path: "/dashboard/projects",
-        element: <Projects />,
+        element: <Project />,
       },
       {
         path: "/dashboard/boards",
@@ -80,6 +73,14 @@ const Router = createBrowserRouter([
   {
     path: "/update/:id",
     element: <Update />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
 ]);
 

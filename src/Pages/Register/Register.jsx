@@ -17,7 +17,6 @@ const Register = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-
     createUser(email, password)
       .then(() => {
         updateProfile(auth.currentUser, {
@@ -25,9 +24,9 @@ const Register = () => {
           photoURL: photo,
         })
           .then(() => {
-            toast.success('User Created Successfully');
+            toast.success("User Created Successfully");
             logOut();
-            navigate('/login')
+            navigate("/login");
           })
           .catch((err) => toast.error(err.message));
       })
@@ -35,12 +34,11 @@ const Register = () => {
   };
 
   return (
-    <div  data-aos="fade-up" className="flex items-center justify-center bg-sky-200 py-10">
-    
+    <div data-aos="fade-up" className="flex items-center justify-center py-10">
       <div className="w-full  flex justify-center items-center">
         <div className="p-5 md:p-10 rounded-lg w-3/4 mx-auto bg-base-100">
           <h2 className="text-3xl md:text-4xl font-bold text-center pb-8">
-            Register Now
+            Welcome To MadeIT <br></br>Register Now
           </h2>
           <form onSubmit={handleCreateUser}>
             <div className="form-control ">
@@ -112,7 +110,7 @@ const Register = () => {
       <div className=" w-3/4 lg:pr-14">
         <img
           className="w-full p-5"
-          src="https://i.ibb.co/6HS80CK/istockphoto-1312423123-612x612.jpg"
+          src="https://i.ibb.co/4Kxk1DV/download-3.png"
           alt=""
         />
       </div>
