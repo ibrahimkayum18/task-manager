@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { IoMdPersonAdd } from "react-icons/io";
 
 const InviteMember = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -8,12 +9,12 @@ const InviteMember = () => {
   };
 
   return (
-    <div className="flex items-center justify-center bg-gray-100">
+    <div className="flex items-center justify-center">
       <button
         onClick={toggleModal}
-        className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
+        className=" text-xl ml-3 focus:outline-none"
       >
-        Invite Workspace Members Now
+        <IoMdPersonAdd />
       </button>
 
       {isModalOpen && (

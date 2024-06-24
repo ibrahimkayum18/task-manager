@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import useProjects from "../../Hooks/useProjects";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 
@@ -8,8 +8,10 @@ const Update = () => {
   const axiosPublic = useAxiosPublic();
   const { id } = useParams();
   const [projects] = useProjects();
-  const uProject = projects.find((item) => item._id === id);
+  const project = projects.find((item) => item._id === id);
   const navigate = useNavigate();
+  const [memberList, setMemberList] = useState([]);
+  console.log(project);
 
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -27,9 +29,92 @@ const Update = () => {
   };
 
   return (
+    // <div className="px-5">
+    //   <h2 className="text-center text-4xl font-semibold mt-5 lg:mt-14">
+    //     Update Task {project.title}
+    //   </h2>
+    //   <form onSubmit={handleUpdate} className="max-w-md mx-auto mt-8">
+    //     <div className="mb-4">
+    //       <label
+    //         htmlFor="title"
+    //         className="block text-sm font-medium text-gray-600"
+    //       >
+    //         Title
+    //       </label>
+    //       <input
+    //         type="text"
+    //         id="title"
+    //         name="title"
+    //         defaultValue={project.title}
+    //         className="mt-1 p-2 w-full border rounded-md"
+    //       />
+    //     </div>
+
+    //     <div className="mb-4">
+    //       <label
+    //         htmlFor="description"
+    //         className="block text-sm font-medium text-gray-600"
+    //       >
+    //         Description
+    //       </label>
+    //       <textarea
+    //         id="description"
+    //         name="description"
+    //         rows="4"
+    //         defaultValue={project.description}
+    //         className="mt-1 p-2 w-full border rounded-md"
+    //       ></textarea>
+    //     </div>
+
+    //     <div className="mb-4">
+    //       <label
+    //         htmlFor="deadline"
+    //         className="block text-sm font-medium text-gray-600"
+    //       >
+    //         Deadline
+    //       </label>
+    //       <input
+    //         type="date"
+    //         id="deadline"
+    //         name="deadline"
+    //         className="mt-1 p-2 w-full border rounded-md"
+    //       />
+    //     </div>
+
+    //     <div className="mb-4">
+    //       <label
+    //         htmlFor="priority"
+    //         className="block text-sm font-medium text-gray-600"
+    //       >
+    //         Priority
+    //       </label>
+
+    //       <select
+    //         className="mt-1 p-2 w-full border rounded-md"
+    //         name="priority"
+    //         defaultValue={project.priority}
+    //       >
+    //         <option value="" disabled>
+    //           Select Priority
+    //         </option>
+    //         <option value="low">Low</option>
+    //         <option value="medium">Medium</option>
+    //         <option value="high">High</option>
+    //       </select>
+    //     </div>
+
+    //     <button
+    //       type="submit"
+    //       className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+    //     >
+    //       Submit
+    //     </button>
+    //   </form>
+    // </div>
+
     <div className="px-5">
       <h2 className="text-center text-4xl font-semibold mt-5 lg:mt-14">
-        Update Task {uProject.title}
+        Update Task {project.title}
       </h2>
       <form onSubmit={handleUpdate} className="max-w-md mx-auto mt-8">
         <div className="mb-4">
@@ -43,7 +128,7 @@ const Update = () => {
             type="text"
             id="title"
             name="title"
-            defaultValue={uProject.title}
+            defaultValue={project.title}
             className="mt-1 p-2 w-full border rounded-md"
           />
         </div>
@@ -59,7 +144,7 @@ const Update = () => {
             id="description"
             name="description"
             rows="4"
-            defaultValue={uProject.description}
+            defaultValue={project.description}
             className="mt-1 p-2 w-full border rounded-md"
           ></textarea>
         </div>
@@ -75,6 +160,7 @@ const Update = () => {
             type="date"
             id="deadline"
             name="deadline"
+            defaultValue={project.deadline} // Ensure to set this value from project
             className="mt-1 p-2 w-full border rounded-md"
           />
         </div>
@@ -86,11 +172,10 @@ const Update = () => {
           >
             Priority
           </label>
-
           <select
             className="mt-1 p-2 w-full border rounded-md"
             name="priority"
-            defaultValue={uProject.priority}
+            defaultValue={project.priority}
           >
             <option value="" disabled>
               Select Priority
@@ -98,6 +183,78 @@ const Update = () => {
             <option value="low">Low</option>
             <option value="medium">Medium</option>
             <option value="high">High</option>
+          </select>
+        </div>
+
+        <div className="mb-4">
+          <label
+            htmlFor="members"
+            className="block text-sm font-medium text-gray-600"
+          >
+            Add Members
+          </label>
+          <select
+            multiple
+            id="members"
+            name="members"
+            className="mt-1 p-2 w-full border rounded-md"
+          >
+            {memberList ? (
+              memberList.map((member) => (
+                <option key={member.id} value={member.id}>
+                  {member.name}
+                </option>
+              ))
+            ) : (
+              <option></option>
+            )}
+          </select>
+        </div>
+
+        <div className="mb-4">
+          <label
+            htmlFor="assign"
+            className="block text-sm font-medium text-gray-600"
+          >
+            Assign Work
+          </label>
+          <select
+            id="assign"
+            name="assign"
+            className="mt-1 p-2 w-full border rounded-md"
+            defaultValue={project.assignedTo}
+          >
+            <option value="" disabled>
+              Select a Member
+            </option>
+            {memberList ? (
+              memberList.map((member) => (
+                <option key={member.id} value={member.id}>
+                  {member.name}
+                </option>
+              ))
+            ) : (
+              <option></option>
+            )}
+          </select>
+        </div>
+
+        <div className="mb-4">
+          <label
+            htmlFor="status"
+            className="block text-sm font-medium text-gray-600"
+          >
+            Status
+          </label>
+          <select
+            id="status"
+            name="status"
+            className="mt-1 p-2 w-full border rounded-md"
+            defaultValue={project.status}
+          >
+            <option value="not started">Not Started</option>
+            <option value="in progress">In Progress</option>
+            <option value="completed">Completed</option>
           </select>
         </div>
 

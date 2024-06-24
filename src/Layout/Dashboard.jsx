@@ -14,16 +14,37 @@ import { AuthContext } from "../Provider/AuthProvider";
 import { RiMenu2Line } from "react-icons/ri";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
-import { Controller, useForm } from "react-hook-form";
+// import { Controller, useForm } from "react-hook-form";
 import DashboardTopBar from "../Components/DashboardTopBar";
 
 const Dashboard = () => {
   const { user, logOut } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
 
-  const { control, handleSubmit, register } = useForm();
+  // const { control, handleSubmit, register } = useForm();
 
-  const onSubmit = (data) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const title = e.target.title.value;
+    const description = e.target.description.value;
+    const deadline = e.target.deadline.value;
+    const author = user.displayName;
+    const authorEmail = user.email;
+    const status = "author";
+    const process = "todo";
+    const member = [];
+
+    const data = {
+      title,
+      description,
+      deadline,
+      author,
+      authorEmail,
+      status,
+      process,
+      member,
+    };
+
     axiosPublic.post("/projects", data).then((res) => {
       if (res.data.insertedId) {
         toast.success("Task Addeded Successfully");
@@ -57,17 +78,12 @@ const Dashboard = () => {
           Workspace Settings
         </Link>
       </li>
-      <li>
-        <Link to={"/dashboard/my-projects"}>
-          <GrProjects />
-          My Projects
-        </Link>
-      </li>
+
       <h2 className="font-bold text-left">Workspace Views</h2>
       <hr />
       <li>
         <Link to={"/dashboard/my-projects"}>
-          <GrTable />
+          <GrProjects />
           Tables
         </Link>
       </li>
@@ -148,10 +164,7 @@ const Dashboard = () => {
               <h3 className="font-bold text-lg">Hello!</h3>
               <p className="py-4">Create New Project</p>
               <div>
-                <form
-                  onSubmit={handleSubmit(onSubmit)}
-                  className="max-w-md mx-auto mt-8"
-                >
+                <form onSubmit={handleSubmit} className="max-w-md mx-auto">
                   <div className="mb-4">
                     <label
                       htmlFor="title"
@@ -163,7 +176,7 @@ const Dashboard = () => {
                       type="text"
                       id="title"
                       name="title"
-                      {...register("title")}
+                      // {...register("title")}
                       className="mt-1 p-2 w-full border rounded-md"
                     />
                   </div>
@@ -178,7 +191,7 @@ const Dashboard = () => {
                       type="date"
                       id="deadline"
                       name="deadline"
-                      {...register("deadline")}
+                      // {...register("deadline")}
                       className="mt-1 p-2 w-full border rounded-md"
                     />
                   </div>
@@ -193,13 +206,13 @@ const Dashboard = () => {
                     <textarea
                       id="description"
                       name="description"
-                      {...register("description")}
-                      rows="4"
+                      // {...register("description")}
+                      rows="3"
                       className="mt-1 p-2 w-full border rounded-md"
                     ></textarea>
                   </div>
 
-                  <div className="mb-4">
+                  {/* <div className="mb-4">
                     <label
                       htmlFor="priority"
                       className="block text-sm font-medium text-gray-600"
@@ -224,7 +237,7 @@ const Dashboard = () => {
                         </select>
                       )}
                     />
-                  </div>
+                  </div> */}
 
                   <button
                     type="submit"
