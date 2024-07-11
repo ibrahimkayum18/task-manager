@@ -69,7 +69,7 @@ const NavBar = () => {
         >
           <img
             className="w-12 h-12 rounded-full bg-white"
-            src="https://i.ibb.co/9gMRtrJ/TM-Symbol-Free-Download-PNG.png"
+            src="https://i.ibb.co/WtQVrNh/download-11.png"
             alt=""
           />
           <span className="text-3xl">

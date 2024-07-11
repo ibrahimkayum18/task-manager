@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../Provider/AuthProvider";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -9,6 +10,7 @@ const Login = () => {
   const { login, googleLogin } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
 
   const handleLogIn = (e) => {
     e.preventDefault();
@@ -24,15 +26,13 @@ const Login = () => {
         toast.success("Logged In Successfully");
         navigate(location?.state ? location.state : "/");
 
-        // if(user){
-        //   const loggedUser = {email}
-        //   axios.post( 'https://job-hub-server-six.vercel.app/jwt',loggedUser, {withCredentials: true})
-        //   .then(res => {
-        //     if(res.data.success){
-        //       navigate(location?.state ? location.state : '/')
-        //     }
-        //   })
-        // }
+        if (user) {
+          axiosPublic.post("/users", user).then((res) => {
+            if (res.data.success) {
+              navigate(location?.state ? location.state : "/");
+            }
+          });
+        }
       })
       .catch((error) => console.log(error));
   };
@@ -41,15 +41,13 @@ const Login = () => {
       .then(() => {
         toast.success("Logged In Successfully");
         navigate(location?.state ? location.state : "/");
-        // if(user){
-        //   const loggedUser = {email}
-        //   axios.post( 'https://job-hub-server-six.vercel.app/jwt',loggedUser, {withCredentials: true})
-        //   .then(res => {
-        //     if(res.data.success){
-        //       navigate(location?.state ? location.state : '/')
-        //     }
-        //   })
-        // }
+        if (user) {
+          axiosPublic.post("/users", user).then((res) => {
+            if (res.data.success) {
+              navigate(location?.state ? location.state : "/");
+            }
+          });
+        }
       })
       .catch((err) => console.error(err.message));
   };

@@ -17,6 +17,7 @@ const Project = () => {
   const [ongoings, setOngoing] = useState([]);
   const [finished, setFinished] = useState([]);
   const axiosPublic = useAxiosPublic();
+  console.log(projects);
 
   useEffect(() => {
     if (projects) {
@@ -33,7 +34,7 @@ const Project = () => {
       setTodos(isTodo);
     }
   }, [projects]);
-  console.log(todos);
+  // console.log(todos);
   useEffect(() => {
     if (projects) {
       const isOngoings = projects.filter(
@@ -51,7 +52,7 @@ const Project = () => {
       setFinished(isDone);
     }
   }, [projects]);
-  // console.log(done);
+  // console.log(finished);
 
   const handleTodoProcess = (id) => {
     Swal.fire({
@@ -149,20 +150,6 @@ const Project = () => {
       }
     });
   };
-  const handleUpdate = (e) => {
-    const { id } = useParams();
-    e.preventDefault();
-    const title = e.target.title.value;
-    const description = e.target.description.value;
-    const deadline = e.target.deadline.value;
-    const priority = e.target.priority.value;
-    const updatedInfo = { title, description, deadline, priority };
-    axiosPublic.put(`/projects/${id}`, updatedInfo).then((res) => {
-      if (res.data.modifiedCount > 0) {
-        toast.success("Task Updated Successfully");
-      }
-    });
-  };
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -188,35 +175,34 @@ const Project = () => {
                       className="opacity-50"
                       // onClick={() => handleTodoProcess(todo._id)}
                     />
+                    <div className="text-xl">
+                      {/* <button
+                        className="mr-3"
+                        onClick={() =>
+                          document.getElementById("my_modal_3").showModal()
+                        }
+                      >
+                        <RiEdit2Fill />
+                      </button> */}
+                      <button
+                        className="text-xl font-bold"
+                        onClick={() => handleDelete(todo._id)}
+                      >
+                        <MdDelete />
+                      </button>
+                      <button className="mr-3">
+                        <InviteMember />
+                      </button>
+                    </div>
                     <FaArrowRight
                       onClick={() => handleOngoingProcess(todo._id)}
                     />
                   </div>
-                  <div className="absolute top-3 right-3 text-xl">
-                    <button
-                      className="mr-3"
-                      onClick={() =>
-                        document.getElementById("my_modal_3").showModal()
-                      }
-                    >
-                      <RiEdit2Fill />
-                    </button>
-                    <button
-                      className="text-xl font-bold"
-                      onClick={() => handleDelete(todo._id)}
-                    >
-                      <MdDelete />
-                    </button>
-                    <button className="mr-3">
-                      <InviteMember />
-                    </button>
-                  </div>
 
                   {/* Update Modal */}
-                  <dialog id="my_modal_3" className="modal">
+                  {/* <dialog id="my_modal_3" className="modal">
                     <div className="modal-box">
                       <form method="dialog">
-                        {/* if there is a button in form, it will close the modal */}
                         <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
                           ✕
                         </button>
@@ -280,7 +266,7 @@ const Project = () => {
                         </button>
                       </form>
                     </div>
-                  </dialog>
+                  </dialog> */}
                 </div>
               ))}
             </div>
@@ -293,7 +279,10 @@ const Project = () => {
             <div className="space-y-4">
               {/* Card */}
               {ongoings.map((ongoing, index) => (
-                <div key={index} className="bg-gray-200 p-4 rounded shadow">
+                <div
+                  key={index}
+                  className="bg-gray-200 p-4 rounded shadow relative"
+                >
                   <p>
                     <strong>{ongoing.title}</strong>
                   </p>
@@ -302,10 +291,99 @@ const Project = () => {
                     <FaArrowLeft
                       onClick={() => handleTodoProcess(ongoing._id)}
                     />
+                    <div className=" text-xl">
+                      {/* <button
+                        className="mr-3"
+                        onClick={() =>
+                          document.getElementById("my_modal_3").showModal()
+                        }
+                      >
+                        <RiEdit2Fill />
+                      </button> */}
+                      <button
+                        className="text-xl font-bold"
+                        onClick={() => handleDelete(ongoing._id)}
+                      >
+                        <MdDelete />
+                      </button>
+                      <button className="mr-3">
+                        <InviteMember />
+                      </button>
+                    </div>
                     <FaArrowRight
                       onClick={() => handleFinishedProcess(ongoing._id)}
                     />
                   </div>
+
+                  {/* Update Modal */}
+                  {/* <dialog id="my_modal_3" className="modal">
+                    <div className="modal-box">
+                      <form method="dialog">
+                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                          ✕
+                        </button>
+                      </form>
+                      <form
+                        onSubmit={handleUpdate}
+                        className="max-w-md mx-auto mt-8"
+                      >
+                        <div className="mb-4">
+                          <label
+                            htmlFor="title"
+                            className="block text-sm font-medium text-gray-600"
+                          >
+                            Title
+                          </label>
+                          <input
+                            type="text"
+                            id="title"
+                            name="title"
+                            defaultValue={ongoing.title}
+                            className="mt-1 p-2 w-full border rounded-md"
+                          />
+                        </div>
+
+                        <div className="mb-4">
+                          <label
+                            htmlFor="description"
+                            className="block text-sm font-medium text-gray-600"
+                          >
+                            Description
+                          </label>
+                          <textarea
+                            id="description"
+                            name="description"
+                            rows="4"
+                            defaultValue={ongoing.description}
+                            className="mt-1 p-2 w-full border rounded-md"
+                          ></textarea>
+                        </div>
+
+                        <div className="mb-4">
+                          <label
+                            htmlFor="deadline"
+                            className="block text-sm font-medium text-gray-600"
+                          >
+                            Deadline
+                          </label>
+                          <input
+                            type="date"
+                            id="deadline"
+                            name="deadline"
+                            className="mt-1 p-2 w-full border rounded-md"
+                          />
+                        </div>
+
+                        <button
+                          type="submit"
+                          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                          onClick={() => handleUpdate(ongoing._id)}
+                        >
+                          Submit
+                        </button>
+                      </form>
+                    </div>
+                  </dialog> */}
                 </div>
               ))}
             </div>
@@ -316,7 +394,10 @@ const Project = () => {
             <h2 className="text-xl font-bold mb-4">Done</h2>
             <div className="space-y-4">
               {finished.map((finish, index) => (
-                <div key={index} className="bg-gray-200 p-4 rounded shadow">
+                <div
+                  key={index}
+                  className="bg-gray-200 p-4 rounded shadow relative"
+                >
                   <p>
                     <strong>{finish.title}</strong>
                   </p>
@@ -328,6 +409,14 @@ const Project = () => {
                     <FaArrowRight
                       onClick={() => handleTodoProcess(finish._id)}
                     />
+                  </div>
+                  <div className="absolute top-3 right-3 text-xl">
+                    <button
+                      className="text-xl font-bold"
+                      onClick={() => handleDelete(finished._id)}
+                    >
+                      <MdDelete />
+                    </button>
                   </div>
                 </div>
               ))}

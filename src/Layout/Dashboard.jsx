@@ -72,14 +72,14 @@ const Dashboard = () => {
           Members
         </Link>
       </li>
-      <li>
+      {/* <li>
         <Link to={"/dashboard/worspace-settings"}>
           <GrWorkshop />
           Workspace Settings
         </Link>
-      </li>
+      </li> */}
 
-      <h2 className="font-bold text-left">Workspace Views</h2>
+      <h2 className="font-bold text-left pt-5 py-2 text-xl">Workspace Views</h2>
       <hr />
       <li>
         <Link to={"/dashboard/my-projects"}>
@@ -87,12 +87,12 @@ const Dashboard = () => {
           Tables
         </Link>
       </li>
-      <li>
+      {/* <li>
         <Link to={"/dashboard/my-projects"}>
           <GrCalendar />
           Calender
         </Link>
-      </li>
+      </li> */}
       <div className="divider"></div>
 
       <li>
@@ -164,6 +164,12 @@ const Dashboard = () => {
               <h3 className="font-bold text-lg">Hello!</h3>
               <p className="py-4">Create New Project</p>
               <div>
+                <form method="dialog">
+                  {/* if there is a button in form, it will close the modal */}
+                  <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                    ✕
+                  </button>
+                </form>
                 <form onSubmit={handleSubmit} className="max-w-md mx-auto">
                   <div className="mb-4">
                     <label
@@ -242,6 +248,7 @@ const Dashboard = () => {
                   <button
                     type="submit"
                     className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                    method="dialog"
                   >
                     Submit
                   </button>

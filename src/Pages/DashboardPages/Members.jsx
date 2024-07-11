@@ -12,20 +12,20 @@ const Members = () => {
             <h2>MadeIT Workspace</h2>
           </div>
         </div>
-        <div>
+        <div className="flex items-center bg-blue-500 py-3 px-5 rounded-md text-white">
+          <button>Add Members Now</button>
           <InviteMember />
         </div>
       </div>
       <hr />
       <div className="grid grid-cols-4 gap-5">
-        <div className="col-span-1 bg-gray-200">
-          <h2>Collaboration 2/5</h2>
+        <div className="col-span-2 bg-gray-200 p-5 font-bold space-y-2">
+          <h2>Collaboration 0</h2>
           <h2>Workshop Members(2)</h2>
           <p>Guest(0)</p>
-          <hr />
           <p>Join Request(0)</p>
         </div>
-        <div className="col-span-3">
+        {/* <div className="col-span-3">
           <ul className="list-none">
             <li className="py-2 border-b border-gray-200">
               <div className="flex items-center">
@@ -41,7 +41,7 @@ const Members = () => {
               </button>
             </li>
           </ul>
-        </div>
+        </div> */}
       </div>
     </div>
   );
